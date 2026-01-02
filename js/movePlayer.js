@@ -2,7 +2,7 @@ const board = document.getElementById('game-board')
 const aliensGrid = document.getElementById('aliens-grid')
 const player = document.getElementById('player')
 
-let x = 0, step = 10
+let x = player.offsetLeft, step = 10
 export const movePlayer = () => {
     const boardWidth = board.offsetWidth
     const playerWidth = player.offsetWidth
