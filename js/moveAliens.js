@@ -1,10 +1,10 @@
 const board = document.getElementById('game-board')
 const aliensGrid = document.getElementById('aliens-grid')
-const boardWidth = board.offsetWidth
-const boardHeight = board.offsetHeight
 let x = 0, y = 0, direction = 1, speed = 2, dropStep = 20
 
 export const moveAliens = () => {
+    const boardWidth = board.offsetWidth
+    const boardHeight = board.offsetHeight
     const gridWidth = aliensGrid.offsetWidth
     const gridHeight = aliensGrid.offsetHeight
     x += speed * direction
