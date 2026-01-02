@@ -3,5 +3,9 @@ import { moveAliens } from "./moveAliens.js";
 import { movePlayer } from "./movePlayer.js";
 
 createAliens()
-requestAnimationFrame(moveAliens)
-movePlayer()
+export const gameLoop = () => {
+    moveAliens()
+    movePlayer()
+    requestAnimationFrame(gameLoop)
+}
+requestAnimationFrame(gameLoop)

@@ -24,5 +24,4 @@ export const moveAliens = () => {
     }
     aliensGrid.style.left = x + "px"
     aliensGrid.style.top = y + "px"
-    requestAnimationFrame(moveAliens)
 }
