@@ -18,7 +18,7 @@ export const moveAliens = () => {
         y += dropStep
         x = 0
     }
-    if (y + gridHeight >= boardHeight) {
+    if (y + gridHeight >= boardHeight-30) {
         console.log("Game Over");
         return;
     }
