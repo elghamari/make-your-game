@@ -39,17 +39,18 @@ header h2 {
 
 .space-txt {
     color: #fff;
-    font-family: "Impact", sans-serif;
+    /* font-family: "Impact", sans-serif; */
     font-size: 8rem;
     letter-spacing: 0.1em;
+
 }
 
 .invaders-txt {
     color: #5cff26;
-    font-family: "Impact", sans-serif;
-    font-size: 5rem;
+    /* font-family: "Impact", sans-serif; */
+    font-size: 5.2rem;
     letter-spacing: 0;
-    margin-top: -10px;
+    margin-top: 0px;
 }
 
 .score-legend {
@@ -87,7 +88,6 @@ header h2 {
     animation-delay: 2.0s;
 }
 
-
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -98,6 +98,7 @@ header h2 {
         transform: translateY(0);
     }
 }
+
 .pixel-art {
     width: 30px;
     height: auto;
@@ -105,13 +106,6 @@ header h2 {
     display: block;
     margin: 0 auto;
 }
-
-
-.score-row>img {
-    width: 30px;
-}
-
-
 
 .mystery-points {
     color: #ff0000;
@@ -123,26 +117,11 @@ header h2 {
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
-    animation: blink 1s infinite;
 }
 
 .play-action p:hover {
     color: #5cff26;
 }
-
-
-@keyframes blink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-}
-
 
 #game-board {
     display: none;
