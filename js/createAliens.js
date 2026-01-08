@@ -1,3 +1,5 @@
+let alienExtra = null
+
 export const createAliens = () => {
     const aliensGrid = document.getElementById('aliens-grid');
     for (let i = 1; i <= 60; i++) {
@@ -12,4 +14,11 @@ export const createAliens = () => {
         alien.classList.add('alien')
         aliensGrid.appendChild(alien)
     }
+    const alienExtraDiv = document.createElement('div')
+    alienExtraDiv.style.backgroundImage = "url('./assets/extra.png')"
+    alienExtraDiv.classList.add('alienExtra')
+    document.getElementById('game-board').appendChild(alienExtraDiv)
+    alienExtra = alienExtraDiv
 }
+
+export const getAlienExtra = () => alienExtra

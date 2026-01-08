@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 150px;
+            border: 2px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background: red;
+            position: absolute;
+            /* top: 50%; */
+            /* transform: translateY(-50%); */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box" id="box"></div>
+    </div>
+
+    <script>
+        const box = document.getElementById("box");
+        const containerWidth = 400;
+        const boxWidth = 50;
+
+        function animate() {
+            const fromLeft = Math.random() < 0.5;
+
+            box.style.transition = "none";
+
+            if (fromLeft) {
+                box.style.left = -boxWidth + "px";
+            } else {
+                box.style.left = containerWidth + "px";
+            }
+
+            requestAnimationFrame(() => {
+                box.style.transition = "left 5s linear";
+
+                if (fromLeft) {
+                    box.style.left = containerWidth + "px";
+                } else {
+                    box.style.left = -boxWidth + "px";
+                }
+            });
+        }
+
+        animate();
+
+        setInterval(animate, 6000);
+
+
+    </script>
+</body>
+
+</html>
