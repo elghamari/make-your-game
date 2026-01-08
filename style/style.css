@@ -3,25 +3,157 @@
     margin: 0;
     padding: 0;
 }
+
+html {
+    font-size: 62.5%;
+}
+
 body {
-    background-color: #222;
+    background-color: #1a1a1a;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     margin: 0;
+    font-family: 'Press Start 2P', cursive;
 }
 
-#game-board {
+#start-screen {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: -50px;
+}
+
+header h2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 6rem;
+    line-height: 1.1;
+    margin-bottom: 4rem;
+}
+
+
+.space-txt {
+    color: #fff;
+    font-family: "Impact", sans-serif;
+    font-size: 8rem;
+    letter-spacing: 0.1em;
+}
+
+.invaders-txt {
+    color: #5cff26;
+    font-family: "Impact", sans-serif;
+    font-size: 5rem;
+    letter-spacing: 0;
+    margin-top: -10px;
+}
+
+.score-legend {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1.4rem;
+}
+
+.score-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+
+.score-row:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.score-row:nth-child(2) {
+    animation-delay: 1.0s;
+}
+
+.score-row:nth-child(3) {
+    animation-delay: 1.5s;
+}
+
+.score-row:nth-child(4) {
+    animation-delay: 2.0s;
+}
+
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.pixel-art {
+    width: 30px;
+    height: auto;
+    image-rendering: pixelated;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.score-row>img {
+    width: 30px;
+}
+
+
+
+.mystery-points {
+    color: #ff0000;
+}
+
+.play-action p {
+    margin-top: 4rem;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    animation: blink 1s infinite;
+}
+
+.play-action p:hover {
+    color: #5cff26;
+}
+
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+
+#game-board {
+    display: none;
     justify-content: center;
     width: 700px;
     height: 600px;
     background-color: #000;
     outline: 4px solid #33ff00;
     border-radius: 10px;
-    position: relative; 
-    overflow: hidden; 
+    position: relative;
+    overflow: hidden;
 }
 
 #aliens-grid {
@@ -30,11 +162,10 @@ body {
     left: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     width: 500px;
     gap: 10px;
     padding-top: 10px;
-    /* border: 1px dashed red; */
 }
 
 .alien {
