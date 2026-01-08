@@ -3,14 +3,20 @@ console.log("befor ----------------");
 import { createAliens } from "./createAliens.js";
 import { moveAliens, moveAlienExtra } from "./moveAliens.js";
 import { movePlayer } from "./movePlayer.js";
-console.log("after +++++++++++++++++");
+import { toggleView } from "./toggleView.js"; 
 
 
-createAliens()
-export const gameLoop = (time) => {
-    moveAliens()
-    movePlayer()
-    moveAlienExtra(time)
-    requestAnimationFrame(gameLoop)
-}
-requestAnimationFrame(gameLoop)
+export const gameLoop = () => {
+    moveAliens();
+    movePlayer();
+    requestAnimationFrame(gameLoop);
+};
+
+
+const startGame = () => {
+    console.log("Game Started!"); 
+    createAliens(); 
+    requestAnimationFrame(gameLoop); 
+};
+
+toggleView(startGame);
