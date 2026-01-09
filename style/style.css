@@ -191,4 +191,5 @@ header h2 {
     width: 40px;
     height: 40px;
     display: none;
+    position: absolute;
 }

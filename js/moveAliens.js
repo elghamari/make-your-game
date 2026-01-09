@@ -34,7 +34,7 @@ export const moveAlienExtra = (time) => {
     const alienExtra = getAlienExtra()
     const boardWidth = board.offsetWidth
     const alienExtraWidth = alienExtra.offsetWidth
-    if (!extraActive && time - lastExtraTime >= 4000) {
+    if (!extraActive && time - lastExtraTime >= 15000) {
         lastExtraTime = time
         extraActive = true
 
@@ -44,7 +44,7 @@ export const moveAlienExtra = (time) => {
         extraX = fromLeft ? -alienExtraWidth : boardWidth
         alienExtra.style.display = "block"
 
-        extraSpeed = (boardWidth + alienExtraWidth) / (3 * 60)
+        extraSpeed = (boardWidth + alienExtraWidth) / (5 * 60)
     }
 
     if (!extraActive) return
