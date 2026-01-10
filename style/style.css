@@ -172,3 +172,24 @@ header h2 {
     display: none;
     position: absolute;
 }
+
+#bunker-container {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 60px;
+    /* left: 0; */
+    width: 100%;
+    /* z-index: 10; */
+}
+.wall {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100px;
+}
+.wall-part {
+    width: 10px;
+    height: 5px;
+    background-color: #00ff00;
+}
+
