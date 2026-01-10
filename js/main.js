@@ -17,8 +17,7 @@ const startGame = () => {
     console.log("Game Started!"); 
     createAliens(); 
     initPlayerPosition();
-    createAliens();
-    createBunker()
+    createBunker();
     requestAnimationFrame(gameLoop); 
 };
 
