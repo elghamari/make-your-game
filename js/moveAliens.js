@@ -2,7 +2,7 @@ import { getAlienExtra } from "./createAliens.js";
 
 const board = document.getElementById('game-board')
 const aliensGrid = document.getElementById('aliens-grid')
-let x = 0, y = 0, direction = 1, speed = 2, dropStep = 20
+let x = 0, y = 0, direction = 1, speed = 2, dropStep = 10
 
 export const moveAliens = () => {
     const boardWidth = board.offsetWidth

@@ -126,7 +126,7 @@ header h2 {
 #game-board {
     display: none;
     justify-content: center;
-    width: 700px;
+    width: 800px;
     height: 600px;
     background-color: #000;
     outline: 4px solid #33ff00;
