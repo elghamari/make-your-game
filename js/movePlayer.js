@@ -1,7 +1,7 @@
 const board = document.getElementById('game-board')
 const player = document.getElementById('player')
 
-let x = player.offsetLeft, step = 4
+let x = 0, step = 4
 
 const keys = {
     ArrowRight: false,
@@ -18,6 +18,11 @@ document.addEventListener("keyup", e => {
         keys[e.key] = false
     }
 }) 
+
+export const initPlayerPosition = () => {
+    x = (board.offsetWidth -player.offsetWidth) /2;
+    player.style.left = x + "px"
+}
 
 export const movePlayer = () => {
     const boardWidth = board.offsetWidth
