@@ -123,15 +123,15 @@ header h2 {
 .play-action p:hover {
     color: #5cff26;
 }
-
-#game-board {
+#screen {
     display: none;
+}
+#game-board {
+    display: flex;
     justify-content: center;
     width: 900px;
     height: 85vh;
-    /* background-color: #000; */
     border-bottom: 4px solid #33ff00;
-    /* border-radius: 10px; */
     position: relative;
     overflow: hidden;
 }
@@ -140,7 +140,6 @@ header h2 {
     position: absolute;
     /* top: 0; */
     /* left: 0; */
-    margin-top: 25px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -154,10 +153,9 @@ header h2 {
     height: 30px;
     background-repeat: no-repeat;
     background-size: contain;
-    /* background-color: #33ff00; */
 }
 
-#player {
+#player, #live {
     height: 30px;
     width: 50px;
     background-image: url('/assets/player.png');
@@ -180,9 +178,7 @@ header h2 {
     justify-content: space-around;
     position: absolute;
     bottom: 60px;
-    /* left: 0; */
     width: 100%;
-    /* z-index: 10; */
 }
 .wall {
     display: flex;
@@ -194,4 +190,18 @@ header h2 {
     height: 5px;
     background-color: #00ff00;
 }
-
+.game-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.info-text, .score {
+    color: #fff;
+    font-size: 20px;
+}
+.score {
+    color: #00ff00;
+}
+.lives-section {
+    /* display: grid; */
+}

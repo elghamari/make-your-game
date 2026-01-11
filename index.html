@@ -18,7 +18,7 @@
                     <span class="invaders-txt">INVADERS</span>
                 </h2>
             </header>
-            
+
             <div class="score-legend">
                 <div class="score-row">
                     <img src="assets/red.png" alt="Invaders 1" class="pixel-art">
@@ -36,19 +36,32 @@
                     <img src="assets/extra.png" alt="Invaders 4" class="pixel-art">
                     <span>= <span class="mystery-points">?? PTS</span></span>
                 </div>
-                
+
                 <div class="play-action">
                     <p>PLAY SPACE INVADERS</p>
                 </div>
             </div>
         </section>
+        <section id="screen">
+            <div class="game-info">
+                <div>
+                    <span class="info-text">Score:</span>
+                    <span class="score">0</span>
+                </div>
+                <div class="lives-section">
+                    <span class="info-text">Lives:</span>
+                    <div id="lives"></div>
+                </div>
+            </div>
+            <div id="game-board">
+                <div id="aliens-grid"></div>
+                <div id="bunker-container"></div>
+                <div id="player"></div>
+            </div>
 
-        <section id="game-board">
-            <div id="aliens-grid"></div>
-            <div id="bunker-container"></div>
-            <div id="player"></div>
         </section>
     </main>
     <script src="js/main.js" type="module"></script>
 </body>
+
 </html>
