@@ -3,7 +3,7 @@ import { getAlienExtra } from "./createAliens.js";
 const board = document.getElementById('game-board')
 const aliensGrid = document.getElementById('aliens-grid')
 let x = 0, y = 0, direction = 1, speed = 2, dropStep = 10
-
+let counter = 0
 export const moveAliens = () => {
     const boardWidth = board.offsetWidth
     const boardHeight = board.offsetHeight
@@ -13,14 +13,16 @@ export const moveAliens = () => {
     if (x + gridWidth >= boardWidth) {
         direction = -1
         y += dropStep
+        counter++
         x = boardWidth - gridWidth
     }
     if (x <= 0) {
         direction = 1
         y += dropStep
+        counter++
         x = 0
     }
-    if (y + gridHeight >= boardHeight-30) {
+    if (y + gridHeight >= boardHeight-40) {
         console.log("Game Over");
         return;
     }
@@ -34,7 +36,7 @@ export const moveAlienExtra = (time) => {
     const alienExtra = getAlienExtra()
     const boardWidth = board.offsetWidth
     const alienExtraWidth = alienExtra.offsetWidth
-    if (!extraActive && time - lastExtraTime >= 15000) {
+    if (!extraActive && time - lastExtraTime >= 15000 && counter >= 2) {
         lastExtraTime = time
         extraActive = true
 
