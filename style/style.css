@@ -193,3 +193,9 @@ header h2 {
     background-color: #00ff00;
 }
 
+.laser {
+    width: 0.4rem;
+    height: 1.6rem;
+    background-color: lime;
+    position: absolute;
+}
