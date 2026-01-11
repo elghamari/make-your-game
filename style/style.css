@@ -10,6 +10,7 @@ html {
 
 body {
     background-color: #1a1a1a;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, black 70%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,19 +127,20 @@ header h2 {
 #game-board {
     display: none;
     justify-content: center;
-    width: 800px;
-    height: 600px;
-    background-color: #000;
-    outline: 4px solid #33ff00;
-    border-radius: 10px;
+    width: 900px;
+    height: 85vh;
+    /* background-color: #000; */
+    border-bottom: 4px solid #33ff00;
+    /* border-radius: 10px; */
     position: relative;
     overflow: hidden;
 }
 
 #aliens-grid {
     position: absolute;
-    top: 0;
-    left: 0;
+    /* top: 0; */
+    /* left: 0; */
+    margin-top: 25px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
