@@ -3,6 +3,7 @@ import { moveAliens, moveAlienExtra } from "./moveAliens.js";
 import { movePlayer, initPlayerPosition } from "./movePlayer.js";
 import { toggleView } from "./toggleView.js"; 
 import { createBunker } from "./createBunker.js" 
+import { createLives } from "./updateLives.js"
 
 
 export const gameLoop = (time) => {
@@ -15,7 +16,8 @@ export const gameLoop = (time) => {
 
 const startGame = () => {
     console.log("Game Started!"); 
-    createAliens(); 
+    createAliens();
+    createLives();
     initPlayerPosition();
     createBunker();
     requestAnimationFrame(gameLoop); 
