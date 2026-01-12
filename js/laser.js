@@ -1,10 +1,19 @@
 import { player, board } from "./movePlayer.js";
+import { aliens } from "./createAliens.js";
 
 const laserSpeed = 10;
 const cooldownTime = 1000;
 let lastShootTime = 0;
 const lasers = []
 
+
+const checkCollision = (rect1,rect2) => {
+    return (rect1.left < rect2.right 
+        && rect1.right > rect2.left
+        && rect1.top < rect2.bottom
+        && rect1.bottom > rect2.top
+    )
+}
 export const shoot = (time) => {
     if ((time - lastShootTime) > cooldownTime) {
         const laser = document.createElement("div");
@@ -25,10 +34,25 @@ export const moveLasers = ()=> {
         let laser = lasers[i];
         let newTop = laser.offsetTop - laserSpeed;
         laser.style.top = newTop + "px";
-
         if(newTop < 0) {
             laser.remove();
-            lasers.splice(i,1)
+            lasers.splice(i,1);
+            continue;
+        }
+        let rectLaser = laser.getBoundingClientRect();
+        for (let j = 0; j < aliens.length; j++) {
+            let alien = aliens[j];
+            let rectAlien = alien.getBoundingClientRect();
+            if(checkCollision(rectLaser,rectAlien)) {
+                console.log("BOM");
+                // alien.remove();
+                alien.style.visibility = "hidden";
+                aliens.splice(j,1);
+                laser.remove();
+                lasers.splice(i,1);
+                break
+            }
         }
     }
 }
+
