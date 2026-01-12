@@ -1,5 +1,6 @@
 import { player, board } from "./movePlayer.js";
 import { aliens, getAlienExtra } from "./createAliens.js";
+import { wallParts } from "./createBunker.js"
 
 
 const laserSpeed = 10;
@@ -41,6 +42,17 @@ export const moveLasers = ()=> {
             continue;
         }
         let rectLaser = laser.getBoundingClientRect();
+        for (let k = 0; k < wallParts.length; k++) {
+            let wall = wallParts[k]
+            let rectWall = wall.getBoundingClientRect()
+            if (checkCollision(rectLaser, rectWall) && wall.style.visibility != "hidden") {
+                wall.style.visibility = "hidden"
+                wallParts.splice(k,1);
+                lasers.splice(i,1);
+                laser.remove();
+                break
+            }
+        }
         for (let j = 0; j < aliens.length; j++) {
             let alien = aliens[j];
             let rectAlien = alien.getBoundingClientRect();

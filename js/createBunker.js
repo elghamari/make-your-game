@@ -1,4 +1,5 @@
 const bunkerContainer = document.getElementById('bunker-container')
+export const wallParts = []
 export const createBunker = () => {
     for (let i = 1; i <= 4; i++) {
         const wall = document.createElement('div')
@@ -11,9 +12,8 @@ export const createBunker = () => {
                 wallPart.style.visibility = "hidden"
             }
             wall.append(wallPart)
+            wallParts.push(wallPart)
         }
         bunkerContainer.append(wall)
     }
 }
-
-
