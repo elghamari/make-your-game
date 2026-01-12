@@ -1,5 +1,6 @@
 import { player, board } from "./movePlayer.js";
-import { aliens } from "./createAliens.js";
+import { aliens, getAlienExtra } from "./createAliens.js";
+
 
 const laserSpeed = 10;
 const cooldownTime = 1000;
@@ -19,8 +20,8 @@ export const shoot = (time) => {
         const laser = document.createElement("div");
         laser.classList.add("laser");
         board.append(laser)
-        let coordX = player.offsetLeft + (player.offsetWidth) / 2 - (laser.offsetWidth) / 2
-        let coordY = player.offsetTop - laser.offsetHeight;
+        let coordX = player.offsetLeft + (player.offsetWidth / 2 ) - (laser.offsetWidth / 2 )
+        let coordY = player.offsetTop;
         laser.style.left = coordX + "px";
         laser.style.top = coordY + "px"
         lastShootTime = time;
@@ -51,6 +52,17 @@ export const moveLasers = ()=> {
                 laser.remove();
                 lasers.splice(i,1);
                 break
+            }
+        }
+        let alienExtra = getAlienExtra();
+        if(lasers.includes(laser) && alienExtra  && alienExtra.style.display === "block") {
+            let rectAlienExtra = alienExtra.getBoundingClientRect();
+            if(checkCollision(rectLaser,rectAlienExtra)) {
+                alienExtra.style.display = "none";
+                laser.remove();
+                lasers.splice(i,1);
+                console.log("extra hit");
+                
             }
         }
     }
