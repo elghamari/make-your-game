@@ -14,7 +14,7 @@ export const gameLoop = (time) => {
     moveAliens();
     movePlayer();
     moveAlienExtra(time)
-    updateTime(time)
+    updateTime(time - startTime)
     if (keys[" "]) {
         shoot(time);
     }
