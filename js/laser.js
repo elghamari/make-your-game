@@ -1,5 +1,7 @@
 import { player, board } from "./movePlayer.js";
 import { aliens } from "./createAliens.js";
+import { getAlienExtra } from "./createAliens.js";
+
 
 const laserSpeed = 10;
 const cooldownTime = 1000;
@@ -51,6 +53,17 @@ export const moveLasers = ()=> {
                 laser.remove();
                 lasers.splice(i,1);
                 break
+            }
+        }
+        let alienExtra = getAlienExtra();
+        if(lasers.includes(laser) && alienExtra  && alienExtra.style.display === "block") {
+            let rectAlienExtra = alienExtra.getBoundingClientRect();
+            if(checkCollision(rectLaser,rectAlienExtra)) {
+                alienExtra.style.display = "none";
+                laser.remove();
+                lasers.splice(i,1);
+                console.log("extra hit");
+                
             }
         }
     }
