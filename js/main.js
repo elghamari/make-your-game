@@ -5,6 +5,8 @@ import { toggleView } from "./toggleView.js";
 import { createBunker } from "./createBunker.js" 
 import { createLives } from "./updateLives.js"
 import { updateTime } from "./updateTime.js"
+import { moveLasers, shoot } from "./laser.js";
+import { keys } from "./movePlayer.js";
 
 let startTime = null
 export const gameLoop = (time) => {
@@ -13,15 +15,19 @@ export const gameLoop = (time) => {
     movePlayer();
     moveAlienExtra(time)
     updateTime(time)
+    if (keys[" "]) {
+        shoot(time);
+    }
+    moveLasers();
     requestAnimationFrame(gameLoop);
 };
 
-const startGame = (time) => {
-    console.log("Game Started!");
+const startGame = () => {
+    console.log("Game Started!"); 
     startTime = null
+    initPlayerPosition();
     createAliens();
     createLives();
-    initPlayerPosition();
     createBunker();
     requestAnimationFrame(gameLoop); 
 };

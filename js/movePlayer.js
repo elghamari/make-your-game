@@ -1,20 +1,21 @@
-const board = document.getElementById('game-board')
-const player = document.getElementById('player')
+export const board = document.getElementById('game-board')
+export const player = document.getElementById('player')
 
 let x = 0, step = 4
 
-const keys = {
+export const keys = {
     ArrowRight: false,
-    ArrowLeft: false
+    ArrowLeft: false,
+    " ": false
 }
 
 document.addEventListener("keydown", e => {
-    if (e.key === "ArrowRight"|| e.key === "ArrowLeft") {
+    if (e.key === "ArrowRight"|| e.key === "ArrowLeft" || e.key === " ") {
         keys[e.key] = true
     }
 }) 
 document.addEventListener("keyup", e => {
-    if (e.key === "ArrowRight"|| e.key === "ArrowLeft") {
+    if (e.key === "ArrowRight"|| e.key === "ArrowLeft" || e.key === " ") {
         keys[e.key] = false
     }
 }) 
