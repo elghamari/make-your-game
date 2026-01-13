@@ -48,8 +48,8 @@ export const moveLasers = () => {
             let rectWall = wall.getBoundingClientRect()
             if (checkCollision(rectLaser, rectWall) && wall.style.visibility != "hidden") {
                 wall.style.visibility = "hidden"
-                wallParts.splice(k,1);
-                lasers.splice(i,1);
+                wallParts.splice(k, 1);
+                lasers.splice(i, 1);
                 laser.remove();
                 break
             }
@@ -86,8 +86,7 @@ export const moveLasers = () => {
     }
 }
 
-// let lastAlienShootTime = 0
-// let nextCooldown = 600
+
 
 export const getShooter = () => {
     const columns = {}
@@ -98,10 +97,47 @@ export const getShooter = () => {
         columns[x].push(alien["element"])
     })
     const shooters = []
-    Object.values(columns).forEach( col => {
+    Object.values(columns).forEach(col => {
         col.sort((a, b) => a.offsetTop - b.offsetTop)
         shooters.push(col[0])
     })
     const index = parseInt(Math.random() * shooters.length)
     return shooters[index]
+}
+
+let lastAlienShootTime = 0
+let nextCooldown = 600
+let alientLaser = []
+export const alientShoot = (time) => {
+    if ((time - lastAlienShootTime) > nextCooldown) {
+        const shooter = getShooter()
+        if (shooter === undefined || shooter === null) {
+            return
+        }
+        const laser = document.createElement("div")
+        laser.classList.add("alien-laser")
+        board.append(laser)
+        const shooterRect = shooter.getBoundingClientRect()
+        const boardRect = board.getBoundingClientRect()
+        let coordX = (shooterRect.left - boardRect.left) + (shooter.offsetWidth / 2) - (laser.offsetWidth / 2)
+        let coordY = (shooterRect.top - boardRect.top) + shooter.offsetHeight
+        laser.style.left = coordX + "px"
+        laser.style.top = coordY + "px"
+        nextCooldown = Math.round(Math.random() * (600 - 300) + 300)
+        lastAlienShootTime = time
+        alientLaser.push(laser)
+    }
+}
+export const moveAlienLasers = () => {
+    for (let i = alientLaser.length - 1; i >= 0; i--) {
+        let laser = alientLaser[i]
+        let newTop = laser.offsetTop + laserSpeed
+        laser.style.top = newTop + "px";
+        let boardHeight = board.offsetHeight
+        if (newTop > boardHeight) {
+            laser.remove();
+            alientLaser.splice(i, 1);
+            continue;
+        }
+    }
 }

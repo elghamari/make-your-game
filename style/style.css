@@ -218,9 +218,12 @@ header h2 {
     background-size: contain;
 }
 
-.laser {
+.laser, .alien-laser  {
     width: 0.4rem;
     height: 1.6rem;
     background-color: lime;
     position: absolute;
+}
+.alien-laser {
+    background-color: red;
 }

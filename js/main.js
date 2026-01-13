@@ -5,7 +5,7 @@ import { toggleView } from "./toggleView.js";
 import { createBunker } from "./createBunker.js" 
 import { createLives } from "./updateLives.js"
 import { updateTime } from "./updateTime.js"
-import { moveLasers, shoot } from "./laser.js";
+import { moveLasers, shoot, alientShoot, moveAlienLasers } from "./laser.js";
 
 let startTime = null
 export const gameLoop = (time) => {
@@ -17,7 +17,9 @@ export const gameLoop = (time) => {
     if (keys[" "]) {
         shoot(time);
     }
-    moveLasers();
+    alientShoot(time)
+    moveLasers()
+    moveAlienLasers()
     requestAnimationFrame(gameLoop);
 };
 
