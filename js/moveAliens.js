@@ -59,3 +59,13 @@ export const moveAlienExtra = (time) => {
         alienExtra.style.display = "none"
     }
 }
+
+export const resetMoveAliens = () => {
+    x = 0;
+    y = 0;
+    direction = 1;
+    counter = 0;
+    extraActive = false;
+    extraX = 0;
+    lastExtraTime = 0; 
+}
