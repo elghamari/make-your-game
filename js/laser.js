@@ -85,3 +85,10 @@ export const moveLasers = () => {
         }
     }
 }
+
+export const restLaser = ()=> {
+    for (let i = 0; i < lasers.length; i++) {
+        let laser = lasers[i];
+        laser.remove();
+    }
+}
