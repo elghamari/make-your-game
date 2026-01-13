@@ -85,3 +85,19 @@ export const moveLasers = () => {
         }
     }
 }
+
+export const getShooters = () => {
+    const columns = {}
+    aliens.forEach(alien => {
+        if (alien.style.visibility === "hidden") return
+        const x = alien.offsetLeft
+        if (!columns[x]) columns[x] = []
+        columns[x].push(alien)
+    })
+    const shooters = []
+    Object.values(columns).forEach( col => {
+        col.sort((a, b) => a.offsetTop - b.offsetTop)
+        shooters.push(col[0])
+    })
+    return shooters
+}
