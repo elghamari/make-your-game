@@ -5,7 +5,7 @@ import { wallParts } from "./createBunker.js"
 import { addScore } from "./gameState.js";
 
 const laserSpeed = 10;
-const cooldownTime = 1000;
+const cooldownTime = 600;
 let lastShootTime = 0;
 const lasers = []
 
@@ -86,18 +86,22 @@ export const moveLasers = () => {
     }
 }
 
-export const getShooters = () => {
+// let lastAlienShootTime = 0
+// let nextCooldown = 600
+
+export const getShooter = () => {
     const columns = {}
     aliens.forEach(alien => {
-        if (alien.style.visibility === "hidden") return
-        const x = alien.offsetLeft
+        if (alien["element"].style.visibility === "hidden") return
+        const x = alien["element"].offsetLeft
         if (!columns[x]) columns[x] = []
-        columns[x].push(alien)
+        columns[x].push(alien["element"])
     })
     const shooters = []
     Object.values(columns).forEach( col => {
         col.sort((a, b) => a.offsetTop - b.offsetTop)
         shooters.push(col[0])
     })
-    return shooters
+    const index = parseInt(Math.random() * shooters.length)
+    return shooters[index]
 }
