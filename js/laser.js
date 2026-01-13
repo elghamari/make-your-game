@@ -42,18 +42,8 @@ export const moveLasers = () => {
             lasers.splice(i, 1);
             continue;
         }
+        CheckWallCollision(laser, i)
         let rectLaser = laser.getBoundingClientRect();
-        for (let k = 0; k < wallParts.length; k++) {
-            let wall = wallParts[k]
-            let rectWall = wall.getBoundingClientRect()
-            if (checkCollision(rectLaser, rectWall) && wall.style.visibility != "hidden") {
-                wall.style.visibility = "hidden"
-                wallParts.splice(k, 1);
-                lasers.splice(i, 1);
-                laser.remove();
-                break
-            }
-        }
         for (let j = 0; j < aliens.length; j++) {
             let alienData = aliens[j];
             let alienDiv = alienData.element;
@@ -139,5 +129,21 @@ export const moveAlienLasers = () => {
             alientLaser.splice(i, 1);
             continue;
         }
+        CheckWallCollision(laser, i)        
     }
+}
+
+const CheckWallCollision = (laser, i) => {
+    let rectLaser = laser.getBoundingClientRect();
+    for (let k = 0; k < wallParts.length; k++) {
+        let wall = wallParts[k]
+        let rectWall = wall.getBoundingClientRect()
+        if (checkCollision(rectLaser, rectWall) && wall.style.visibility != "hidden") {
+            wall.style.visibility = "hidden"
+            wallParts.splice(k, 1);
+            lasers.splice(i, 1);
+            laser.remove();
+            break
+        }
+    }  
 }
