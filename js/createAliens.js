@@ -30,3 +30,18 @@ export const createAliens = () => {
 }
 
 export const getAlienExtra = () => alienExtra
+
+
+export const restAliens = () => {
+    const aliensGrid = document.getElementById('aliens-grid');
+    
+    if (aliensGrid) {
+        aliensGrid.innerHTML = "";
+        aliensGrid.style.top = "0px"; 
+        aliensGrid.style.left = "0px"; 
+    }
+
+    aliens.length = 0;
+    const extra = document.querySelector('.alienExtra');
+    if (extra) extra.remove();
+}
