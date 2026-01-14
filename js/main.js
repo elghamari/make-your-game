@@ -5,11 +5,10 @@ import { toggleView } from "./toggleView.js";
 import { createBunker } from "./createBunker.js";
 import { createLives } from "./updateLives.js";
 import { updateTime } from "./updateTime.js";
-import { moveLasers, shoot, restLaser } from "./laser.js";
+import { moveLasers, shoot, restLaser, moveAlienLasers, alientShoot } from "./laser.js";
 import { togglePause, getPauseState, resetGameState } from "./gameState.js";
 
 let startTime = null;
-
 export const gameLoop = (time) => {
     if (startTime === null) startTime = time;
     
@@ -23,6 +22,9 @@ export const gameLoop = (time) => {
         }
         moveLasers();
     }
+    alientShoot(time)
+    moveLasers()
+    moveAlienLasers()
     requestAnimationFrame(gameLoop);
 };
 
