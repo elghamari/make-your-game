@@ -37,18 +37,14 @@ header h2 {
     margin-bottom: 4rem;
 }
 
-
 .space-txt {
     color: #fff;
-    /* font-family: "Impact", sans-serif; */
     font-size: 8rem;
     letter-spacing: 0.1em;
-
 }
 
 .invaders-txt {
     color: #00ff00;
-    /* font-family: "Impact", sans-serif; */
     font-size: 5.2rem;
     letter-spacing: 0;
     margin-top: 0px;
@@ -71,7 +67,6 @@ header h2 {
     opacity: 0;
     animation: slideIn 0.5s ease-out forwards;
 }
-
 
 .score-row:nth-child(1) {
     animation-delay: 0.5s;
@@ -118,14 +113,18 @@ header h2 {
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
+    animation: flashGreen 1s infinite;
 }
 
 .play-action p:hover {
     color: #00ff00;
+    text-shadow: 0 0 15px #00ff00; 
 }
+
 #screen {
     display: none;
 }
+
 #game-board {
     display: flex;
     justify-content: center;
@@ -138,8 +137,6 @@ header h2 {
 
 #aliens-grid {
     position: absolute;
-    /* top: 0; */
-    /* left: 0; */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -180,36 +177,44 @@ header h2 {
     bottom: 60px;
     width: 100%;
 }
+
 .wall {
     display: flex;
     flex-wrap: wrap;
     width: 100px;
 }
+
 .wall-part {
     width: 10px;
     height: 5px;
     background-color: #00ff00;
 }
+
 .game-info {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
+
 .info-text, .score {
     color: #fff;
     font-size: 20px;
 }
+
 .score {
     color: #00ff00;
 }
+
 .lives-section {
     display: flex;
     align-items: center;
 }
+
 #lives {
     display: flex;
     gap: 10px;
 }
+
 .live {
     height: 30px;
     width: 50px;
@@ -252,6 +257,10 @@ header h2 {
     text-shadow: 4px 4px 0px #000;
 }
 
+.pause-title {
+    animation: flashGreen 1s infinite;
+}
+
 .game-btn {
     font-family: 'Press Start 2P', cursive;
     padding: 15px 30px;
@@ -266,10 +275,29 @@ header h2 {
     background: #00ff00;
     color: white;
 }
+
 .alien-laser {
     background-color: #ff0000;
 }
 
 .game-over {
     color: #ff0000;
+}
+
+@keyframes flashGreen {
+    0% {
+        color: #fff;
+        opacity: 1;
+        text-shadow: none;
+    }
+    50% {
+        color: #00ff00;
+        text-shadow: 0 0 15px #00ff00; 
+        opacity: 1;
+    }
+    100% {
+        color: #fff;
+        opacity: 1;
+        text-shadow: none;
+    }
 }
