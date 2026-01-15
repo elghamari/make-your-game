@@ -47,7 +47,7 @@ header h2 {
 }
 
 .invaders-txt {
-    color: #5cff26;
+    color: #00ff00;
     /* font-family: "Impact", sans-serif; */
     font-size: 5.2rem;
     letter-spacing: 0;
@@ -121,7 +121,7 @@ header h2 {
 }
 
 .play-action p:hover {
-    color: #5cff26;
+    color: #00ff00;
 }
 #screen {
     display: none;
@@ -131,7 +131,7 @@ header h2 {
     justify-content: center;
     width: 900px;
     height: 85vh;
-    border-bottom: 4px solid #33ff00;
+    border-bottom: 4px solid #00ff00;
     position: relative;
     overflow: hidden;
 }
@@ -221,7 +221,7 @@ header h2 {
 .laser, .alien-laser  {
     width: 0.4rem;
     height: 1.6rem;
-    background-color: lime;
+    background-color: #00ff00;
     position: absolute;
 }
 
@@ -247,7 +247,7 @@ header h2 {
 .pause-title, .statu-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 3rem;
-    color: #4cd137;
+    color: #00ff00;
     margin-bottom: 40px;
     text-shadow: 4px 4px 0px #000;
 }
@@ -258,14 +258,18 @@ header h2 {
     font-size: 1rem;
     cursor: pointer;
     background: #fff;
-    border: 4px solid #4cd137;
+    border: 4px solid #00ff00;
     margin: 10px;
 }
 
 .game-btn:hover {
-    background: #4cd137;
+    background: #00ff00;
     color: white;
 }
 .alien-laser {
-    background-color: red;
+    background-color: #ff0000;
+}
+
+.game-over {
+    color: #ff0000;
 }

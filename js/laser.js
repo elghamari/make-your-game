@@ -147,7 +147,8 @@ export const moveAlienLasers = () => {
                 const live = lives.pop()
                 live.remove()
                 if (lives.length === 0) {
-                    gameState("GAME OVER")
+
+                    gameState("GAME OVER", "game-over")
                     return
                 }
                 player.style.display = "block";

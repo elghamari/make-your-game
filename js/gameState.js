@@ -27,8 +27,9 @@ export const resetGameState = ()=> {
     scoreElement.innerText = score;
 }
 
-export const gameState = (statu) => {
+export const gameState = (statu,clas) => {
     isPaused = true
     statuTitle.innerText = statu
+    statuTitle.classList.add(clas)
     gameStatus.classList.add('visible')
 }
