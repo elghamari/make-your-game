@@ -33,3 +33,7 @@ export const gameState = (statu,clas) => {
     statuTitle.classList.add(clas)
     gameStatus.classList.add('visible')
 }
+
+export const changeState = (state) => {
+    isPaused = state
+}

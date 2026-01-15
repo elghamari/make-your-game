@@ -1,29 +1,28 @@
-import { getAlienExtra } from "./createAliens.js";
+import { getAlienExtra, aliens } from "./createAliens.js";
+import { gameState } from "./gameState.js"
 
 const board = document.getElementById('game-board')
 const aliensGrid = document.getElementById('aliens-grid')
-let x = 0, y = 0, direction = 1, speed = 2, dropStep = 10
+let x = 0, y = 0, direction = 1, speed = 2, dropStep = 5
 let counter = 0
 export const moveAliens = () => {
-    const boardWidth = board.offsetWidth
     const boardHeight = board.offsetHeight
-    const gridWidth = aliensGrid.offsetWidth
     const gridHeight = aliensGrid.offsetHeight
+    const edges = getRealEdges()
+    const boardRect = board.getBoundingClientRect();
     x += speed * direction
-    if (x + gridWidth >= boardWidth) {
+    if (edges.right >= boardRect.right) {
         direction = -1
         y += dropStep
         counter++
-        x = boardWidth - gridWidth
     }
-    if (x <= 0) {
+    if (edges.left <= boardRect.left) {
         direction = 1
         y += dropStep
         counter++
-        x = 0
     }
-    if (y + gridHeight >= boardHeight-40) {
-        console.log("Game Over");
+    if (y + gridHeight >= boardHeight - 40) {
+        gameState("GAME OVER", "game-over")
         return;
     }
     aliensGrid.style.left = x + "px"
@@ -67,5 +66,17 @@ export const resetMoveAliens = () => {
     counter = 0;
     extraActive = false;
     extraX = 0;
-    lastExtraTime = 0; 
+    lastExtraTime = 0;
+}
+
+const getRealEdges = () => {
+    let leftEdge = board.offsetWidth
+    let rightEdge = 0
+    aliens.forEach(alien => {
+        if (alien.element.style.visibility === "hidden") return
+        const alienRect = alien.element.getBoundingClientRect();
+        if (alienRect.right > rightEdge) rightEdge = alienRect.right;
+        if (alienRect.left < leftEdge) leftEdge = alienRect.left;
+    });
+    return { left: leftEdge, right: rightEdge }
 }
