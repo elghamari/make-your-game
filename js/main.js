@@ -28,6 +28,11 @@ export const gameLoop = (time) => {
 document.addEventListener("keydown", handlePause);
 document.getElementById("btn-continue").addEventListener("click", handlePause);
 document.getElementById("btn-restart").addEventListener("click", restartGame);
+document.getElementById("btn-play-again").addEventListener("click", () => {
+    const gameStatus = document.getElementById('game-status')
+    gameStatus.classList.remove("visible")
+    restartGame()
+});
 
 const startGame = () => {
     initGame(); 
