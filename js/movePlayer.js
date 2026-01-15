@@ -47,3 +47,15 @@ export const createPlayer = () => {
     playerSection.append(newPlayer)
     player = newPlayer
 }
+
+export const resetPlayer = () => {
+    if (player) {
+        player.remove();
+        player = null; 
+    }
+
+    keys.ArrowRight = false;
+    keys.ArrowLeft = false;
+    keys[" "] = false;
+    x = 0;
+}
