@@ -42,7 +42,7 @@ export const moveLasers = () => {
             lasers.splice(i, 1);
             continue;
         }
-        CheckWallCollision(laser, i)
+        CheckWallCollision(lasers, laser, i)
         let rectLaser = laser.getBoundingClientRect();
         for (let j = 0; j < aliens.length; j++) {
             let alienData = aliens[j];
@@ -134,11 +134,11 @@ export const moveAlienLasers = () => {
             alientLaser.splice(i, 1);
             continue;
         }
-        CheckWallCollision(laser, i)        
+        CheckWallCollision(alientLaser, laser, i)        
     }
 }
 
-const CheckWallCollision = (laser, i) => {
+const CheckWallCollision = (lasers, laser, i) => {
     let rectLaser = laser.getBoundingClientRect();
     for (let k = 0; k < wallParts.length; k++) {
         let wall = wallParts[k]

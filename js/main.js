@@ -11,8 +11,11 @@ import { togglePause, getPauseState, resetGameState } from "./gameState.js";
 let startTime = null;
 export const gameLoop = (time) => {
     if (startTime === null) startTime = time;
-    
+
     if (!getPauseState()) {
+        alientShoot(time)
+        moveLasers()
+        moveAlienLasers()
         moveAliens();
         movePlayer();
         moveAlienExtra(time);
@@ -20,11 +23,7 @@ export const gameLoop = (time) => {
         if (keys[" "]) {
             shoot(time);
         }
-        moveLasers();
     }
-    alientShoot(time)
-    moveLasers()
-    moveAlienLasers()
     requestAnimationFrame(gameLoop);
 };
 
@@ -46,7 +45,7 @@ document.getElementById("btn-restart").addEventListener("click", () => {
     resetGameState();
     resetMoveAliens();
     document.getElementById("bunker-container").innerHTML = "";
-    
+
     startTime = null;
     initPlayerPosition();
     createAliens();
