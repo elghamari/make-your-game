@@ -1,7 +1,7 @@
 import { player, board } from "./movePlayer.js";
 import { aliens, getAlienExtra } from "./createAliens.js";
 import { wallParts } from "./createBunker.js"
-import { addScore, gameState, togglePause } from "./gameState.js";
+import { addScore, gameState, changeState } from "./gameState.js";
 
 const laserSpeed = 10;
 const cooldownTime = 600;
@@ -56,6 +56,9 @@ export const moveLasers = () => {
                 laser.remove();
                 lasers.splice(i, 1);
                 addScore(alienData.points);
+                if (aliens.length === 0) {
+                    gameState("YOU WIN!")
+                }
                 break;
             }
         }
@@ -75,7 +78,7 @@ export const moveLasers = () => {
     }
 }
 
-export const restLaser = ()=> {
+export const restLaser = () => {
     for (let i = 0; i < lasers.length; i++) {
         let laser = lasers[i];
         laser.remove();
@@ -133,9 +136,9 @@ export const moveAlienLasers = () => {
             alientLaser.splice(i, 1);
             continue;
         }
-        CheckWallCollision(alientLaser, laser, i)  
-        let rectLaser = laser.getBoundingClientRect();    
-        if (alientLaser.includes(laser) && player) {       
+        CheckWallCollision(alientLaser, laser, i)
+        let rectLaser = laser.getBoundingClientRect();
+        if (alientLaser.includes(laser) && player) {
             let rectPlayer = player.getBoundingClientRect();
             if (checkCollision(rectLaser, rectPlayer)) {
                 let lives = Array.from(document.querySelectorAll('.live'))
@@ -147,11 +150,14 @@ export const moveAlienLasers = () => {
                 const live = lives.pop()
                 live.remove()
                 if (lives.length === 0) {
-
                     gameState("GAME OVER", "game-over")
                     return
                 }
-                player.style.display = "block";
+                changeState(true)
+                setTimeout(() => {
+                    changeState(false)
+                    player.style.display = "block";
+                }, 1000);
             }
         }
 
@@ -170,5 +176,5 @@ const CheckWallCollision = (lasers, laser, i) => {
             laser.remove();
             break
         }
-    }  
+    }
 }
