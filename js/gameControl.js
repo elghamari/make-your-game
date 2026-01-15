@@ -1,15 +1,13 @@
 import { togglePause, getPauseState, resetGameState } from "./gameState.js";
 import { restAliens, createAliens } from "./createAliens.js";
 import { restLaser } from "./laser.js";
-import { initPlayerPosition, createPlayer } from "./movePlayer.js";
+import { initPlayerPosition, createPlayer, resetPlayer } from "./movePlayer.js";
 import { createLives } from "./updateLives.js";
 import { createBunker } from "./createBunker.js";
 import { resetMoveAliens } from "./moveAliens.js"; 
 
-
 let totalGameTime = 0;  
 let startTime = null;   
-
 
 export const getGameTime = (currentTime) => {
     if (startTime === null) {
@@ -41,17 +39,21 @@ export const restartGame = () => {
     totalGameTime = 0;
     startTime = null; 
     
-    restAliens();
-    restLaser();
-    resetGameState();
-    resetMoveAliens(); 
+    restAliens();       
+    restLaser();      
+    resetMoveAliens();  
+    resetPlayer();      
+    resetGameState();   
+    
     const bunkerContainer = document.getElementById("bunker-container");
     if (bunkerContainer) bunkerContainer.innerHTML = "";
-    
+
+    createPlayer();
     initPlayerPosition(); 
     createAliens();
     createLives();
     createBunker();
+    
     document.getElementById("game-board").focus();
 };
 
