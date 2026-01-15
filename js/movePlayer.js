@@ -1,5 +1,6 @@
 export const board = document.getElementById('game-board')
-export const player = document.getElementById('player')
+export const playerSection = document.getElementById('player-section')
+export let player = null
 
 let x = 0, step = 4
 
@@ -38,4 +39,11 @@ export const movePlayer = () => {
     const maxX = boardWidth - playerWidth
     if (x > maxX) x = maxX 
     player.style.left = x + "px"
+}
+
+export const createPlayer = () => {
+    const newPlayer = document.createElement('div')
+    newPlayer.id = "player"
+    playerSection.append(newPlayer)
+    player = newPlayer
 }
