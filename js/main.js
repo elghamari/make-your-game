@@ -1,6 +1,6 @@
 import { createAliens, restAliens } from "./createAliens.js";
 import { moveAliens, moveAlienExtra, resetMoveAliens } from "./moveAliens.js";
-import { movePlayer, initPlayerPosition, keys } from "./movePlayer.js";
+import { movePlayer, createPlayer, initPlayerPosition, keys } from "./movePlayer.js";
 import { toggleView } from "./toggleView.js";
 import { createBunker } from "./createBunker.js";
 import { createLives } from "./updateLives.js";
@@ -57,10 +57,11 @@ document.getElementById("btn-restart").addEventListener("click", () => {
 const startGame = () => {
     console.log("Game Started!");
     startTime = null;
-    initPlayerPosition();
+    createPlayer();
     createAliens();
     createLives();
     createBunker();
+    initPlayerPosition();
     requestAnimationFrame(gameLoop);
 };
 

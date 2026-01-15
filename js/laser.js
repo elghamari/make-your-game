@@ -1,8 +1,7 @@
 import { player, board } from "./movePlayer.js";
 import { aliens, getAlienExtra } from "./createAliens.js";
 import { wallParts } from "./createBunker.js"
-
-import { addScore } from "./gameState.js";
+import { addScore, gameState, togglePause } from "./gameState.js";
 
 const laserSpeed = 10;
 const cooldownTime = 600;
@@ -134,7 +133,27 @@ export const moveAlienLasers = () => {
             alientLaser.splice(i, 1);
             continue;
         }
-        CheckWallCollision(alientLaser, laser, i)        
+        CheckWallCollision(alientLaser, laser, i)  
+        let rectLaser = laser.getBoundingClientRect();    
+        if (alientLaser.includes(laser) && player) {       
+            let rectPlayer = player.getBoundingClientRect();
+            if (checkCollision(rectLaser, rectPlayer)) {
+                let lives = Array.from(document.querySelectorAll('.live'))
+                console.log('lives len ====> ', lives.length);
+                player.style.display = "none";
+                laser.remove();
+                alientLaser.splice(i, 1);
+                console.log("player hit");
+                const live = lives.pop()
+                live.remove()
+                if (lives.length === 0) {
+                    gameState("GAME OVER")
+                    return
+                }
+                player.style.display = "block";
+            }
+        }
+
     }
 }
 

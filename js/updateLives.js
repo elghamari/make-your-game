@@ -3,7 +3,7 @@ export const createLives = () => {
     lives.innerHTML = "";
     for (let i = 0; i < 3; i++) {
         const live = document.createElement('div')
-        live.id = 'live'
+        live.classList.add('live')
         lives.append(live)
     }
 
