@@ -80,9 +80,16 @@ export const moveLasers = () => {
 
 export const restLaser = () => {
     for (let i = 0; i < lasers.length; i++) {
-        let laser = lasers[i];
-        laser.remove();
+        lasers[i].remove(); 
     }
+    lasers.length = 0; 
+    for (let i = 0; i < alientLaser.length; i++) {
+        alientLaser[i].remove(); 
+    }
+    alientLaser.length = 0; 
+    lastShootTime = 0;
+    lastAlienShootTime = 0;
+    nextCooldown = 600; 
 }
 
 export const getShooter = () => {
