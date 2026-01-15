@@ -64,9 +64,18 @@ export const resetMoveAliens = () => {
     y = 0;
     direction = 1;
     counter = 0;
+    speed = 2; 
+
     extraActive = false;
     extraX = 0;
     lastExtraTime = 0;
+    aliensGrid.style.left = "0px";
+    aliensGrid.style.top = "0px";
+    const alienExtra = getAlienExtra();
+    if (alienExtra) {
+        alienExtra.style.display = "none"; 
+        alienExtra.style.left = "-200px"; 
+    }
 }
 
 const getRealEdges = () => {
