@@ -1,67 +1,36 @@
-import { createAliens, restAliens } from "./createAliens.js";
-import { moveAliens, moveAlienExtra, resetMoveAliens } from "./moveAliens.js";
-import { movePlayer, createPlayer, initPlayerPosition, keys } from "./movePlayer.js";
+import { moveAliens, moveAlienExtra } from "./moveAliens.js";
+import { movePlayer, keys } from "./movePlayer.js";
 import { toggleView } from "./toggleView.js";
-import { createBunker } from "./createBunker.js";
-import { createLives } from "./updateLives.js";
 import { updateTime } from "./updateTime.js";
-import { moveLasers, shoot, restLaser, moveAlienLasers, alientShoot } from "./laser.js";
-import { togglePause, getPauseState, resetGameState } from "./gameState.js";
+import { moveLasers, shoot, moveAlienLasers, alientShoot } from "./laser.js";
+import { getPauseState } from "./gameState.js";
 
-let startTime = null;
+import { handlePause, restartGame, getGameTime, initGame } from "./gameControl.js";
 export const gameLoop = (time) => {
-    if (startTime === null) startTime = time;
-
     if (!getPauseState()) {
-        alientShoot(time)
-        moveLasers()
-        moveAlienLasers()
+        const gameTime = getGameTime(time); 
+
+        alientShoot(gameTime); 
+        moveLasers();
+        moveAlienLasers();
         moveAliens();
         movePlayer();
-        moveAlienExtra(time);
-        updateTime(time - startTime);
+        moveAlienExtra(gameTime);
+        updateTime(gameTime);
+        
         if (keys[" "]) {
-            shoot(time);
+            shoot(gameTime); 
         }
     }
     requestAnimationFrame(gameLoop);
 };
 
-document.addEventListener("keydown", e => {
-    if (e.key === "p" || e.key === "P") {
-        togglePause();
-    }
-});
-
-document.getElementById("btn-continue").addEventListener("click", () => {
-    togglePause();
-    document.getElementById("game-board").focus();
-});
-
-document.getElementById("btn-restart").addEventListener("click", () => {
-    togglePause();
-    restAliens();
-    restLaser();
-    resetGameState();
-    resetMoveAliens();
-    document.getElementById("bunker-container").innerHTML = "";
-
-    startTime = null;
-    initPlayerPosition();
-    createAliens();
-    createLives();
-    createBunker();
-    document.getElementById("game-board").focus();
-});
+document.addEventListener("keydown", handlePause);
+document.getElementById("btn-continue").addEventListener("click", handlePause);
+document.getElementById("btn-restart").addEventListener("click", restartGame);
 
 const startGame = () => {
-    console.log("Game Started!");
-    startTime = null;
-    createPlayer();
-    createAliens();
-    createLives();
-    createBunker();
-    initPlayerPosition();
+    initGame(); 
     requestAnimationFrame(gameLoop);
 };
 
