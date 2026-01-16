@@ -7,7 +7,7 @@ const laserSpeed = 10;
 const cooldownTime = 600;
 let lastShootTime = 0;
 const lasers = []
-
+let alientLaser = []
 
 const checkCollision = (rect1, rect2) => {
     return (rect1.left < rect2.right
@@ -75,6 +75,18 @@ export const moveLasers = () => {
                 console.log(point);
             }
         }
+        for (let j = 0; j < alientLaser.length; j++) {
+            const alien_laser = alientLaser[j]
+            const alienLaserRect = alien_laser.getBoundingClientRect()
+            if (checkCollision(rectLaser, alienLaserRect) && lasers.includes(laser) && alientLaser.includes(alien_laser)) {
+                laser.remove()
+                lasers.splice(i, 1)
+                alien_laser.remove()
+                alientLaser.splice(j, 1)
+                console.log("lasers removed")
+                break
+            }
+        }
     }
 }
 
@@ -111,7 +123,6 @@ export const getShooter = () => {
 
 let lastAlienShootTime = 0
 let nextCooldown = 600
-let alientLaser = []
 export const alientShoot = (time) => {
     if ((time - lastAlienShootTime) > nextCooldown) {
         const shooter = getShooter()
