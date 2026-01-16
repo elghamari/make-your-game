@@ -57,7 +57,7 @@ export const moveLasers = () => {
                 lasers.splice(i, 1);
                 addScore(alienData.points);
                 if (aliens.length === 0) {
-                    gameState("YOU WIN!")
+                    gameState("YOU WIN!", "you-win")
                 }
                 break;
             }

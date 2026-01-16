@@ -273,7 +273,7 @@ header h2 {
 
 .game-btn:hover {
     background: #00ff00;
-    color: white;
+    color: #000;
 }
 
 .alien-laser {
@@ -282,6 +282,9 @@ header h2 {
 
 .game-over {
     color: #ff0000;
+}
+.you-win {
+    color: #00ff00;
 }
 
 @keyframes flashGreen {
