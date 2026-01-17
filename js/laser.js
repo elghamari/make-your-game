@@ -21,9 +21,11 @@ export const shoot = (time) => {
         const laser = document.createElement("div");
         laser.classList.add("laser");
         board.append(laser)
-        let coordX = player.offsetLeft + (player.offsetWidth / 2) - (laser.offsetWidth / 2)
-        let coordY = player.offsetTop;
-        laser.style.left = coordX + "px";
+        const playerRect = player.getBoundingClientRect()
+        const boardRect = board.getBoundingClientRect()
+        let coordX = (playerRect.left - boardRect.left) + (player.offsetWidth / 2) - (laser.offsetWidth / 2)
+        let coordY = (playerRect.top - boardRect.top)
+        laser.style.left = coordX + "px"
         laser.style.top = coordY + "px"
         lastShootTime = time;
         console.log("it's happend ");
@@ -92,16 +94,16 @@ export const moveLasers = () => {
 
 export const restLaser = () => {
     for (let i = 0; i < lasers.length; i++) {
-        lasers[i].remove(); 
+        lasers[i].remove();
     }
-    lasers.length = 0; 
+    lasers.length = 0;
     for (let i = 0; i < alientLaser.length; i++) {
-        alientLaser[i].remove(); 
+        alientLaser[i].remove();
     }
-    alientLaser.length = 0; 
+    alientLaser.length = 0;
     lastShootTime = 0;
     lastAlienShootTime = 0;
-    nextCooldown = 600; 
+    nextCooldown = 600;
 }
 
 export const getShooter = () => {

@@ -25,14 +25,14 @@ export const moveAliens = () => {
         gameState("GAME OVER", "game-over")
         return;
     }
-    aliensGrid.style.left = x + "px"
-    aliensGrid.style.top = y + "px"
+    aliensGrid.style.transform = `translate(${x}px, ${y}px)`
 }
 
 let extraX = 0, extraDirection = 1, extraActive = false, extraSpeed = 0, lastExtraTime = 0
 
 export const moveAlienExtra = (time) => {
     const alienExtra = getAlienExtra()
+    if (!alienExtra) return
     const boardWidth = board.offsetWidth
     const alienExtraWidth = alienExtra.offsetWidth
     if (!extraActive && time - lastExtraTime >= 15000 && counter >= 2) {
@@ -51,7 +51,7 @@ export const moveAlienExtra = (time) => {
     if (!extraActive) return
 
     extraX += extraDirection * extraSpeed
-    alienExtra.style.left = extraX + "px"
+    alienExtra.style.transform = `translateX(${extraX}px)`
 
     if (extraX > boardWidth + alienExtraWidth || extraX < -alienExtraWidth * 2) {
         extraActive = false
@@ -69,18 +69,17 @@ export const resetMoveAliens = () => {
     extraActive = false;
     extraX = 0;
     lastExtraTime = 0;
-    aliensGrid.style.left = "0px";
-    aliensGrid.style.top = "0px";
+    aliensGrid.style.transform = `translate(0px, 0px)`
     const alienExtra = getAlienExtra();
     if (alienExtra) {
-        alienExtra.style.display = "none"; 
-        alienExtra.style.left = "-200px"; 
+        alienExtra.style.display = "none"
+        alienExtra.style.transform = `translateX(0px)`
     }
 }
 
 const getRealEdges = () => {
-    let leftEdge = board.offsetWidth
-    let rightEdge = 0
+    let leftEdge = Infinity
+    let rightEdge = -Infinity
     aliens.forEach(alien => {
         if (alien.element.style.visibility === "hidden") return
         const alienRect = alien.element.getBoundingClientRect();
