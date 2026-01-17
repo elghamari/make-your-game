@@ -2,6 +2,7 @@ import { player, board } from "./movePlayer.js";
 import { aliens, getAlienExtra } from "./createAliens.js";
 import { wallParts } from "./createBunker.js"
 import { addScore, gameState, changeState } from "./gameState.js";
+const timerDisplay = document.getElementById('timer-display')
 
 const laserSpeed = 10;
 const cooldownTime = 600;
@@ -28,7 +29,6 @@ export const shoot = (time) => {
         laser.style.left = coordX + "px"
         laser.style.top = coordY + "px"
         lastShootTime = time;
-        console.log("it's happend ");
         lasers.push(laser);
     }
 }
@@ -51,10 +51,8 @@ export const moveLasers = () => {
             let rectAlien = alienDiv.getBoundingClientRect();
 
             if (checkCollision(rectLaser, rectAlien)) {
-                console.log("BOM");
                 // alien.remove();
                 alienDiv.style.visibility = "hidden";
-                aliens.splice(j, 1);
                 laser.remove();
                 lasers.splice(i, 1);
                 addScore(alienData.points);
@@ -71,10 +69,8 @@ export const moveLasers = () => {
                 alienExtra.style.display = "none";
                 laser.remove();
                 lasers.splice(i, 1);
-                console.log("extra hit");
                 let point = Math.floor(Math.random() * 200) + 100;
                 addScore(point);
-                console.log(point);
             }
         }
         for (let j = 0; j < alientLaser.length; j++) {
@@ -85,7 +81,6 @@ export const moveLasers = () => {
                 lasers.splice(i, 1)
                 alien_laser.remove()
                 alientLaser.splice(j, 1)
-                console.log("lasers removed")
                 break
             }
         }
@@ -162,11 +157,9 @@ export const moveAlienLasers = () => {
             let rectPlayer = player.getBoundingClientRect();
             if (checkCollision(rectLaser, rectPlayer)) {
                 let lives = Array.from(document.querySelectorAll('.live'))
-                console.log('lives len ====> ', lives.length);
                 player.style.display = "none";
                 laser.remove();
                 alientLaser.splice(i, 1);
-                console.log("player hit");
                 const live = lives.pop()
                 live.remove()
                 if (lives.length === 0) {
@@ -174,9 +167,11 @@ export const moveAlienLasers = () => {
                     return
                 }
                 changeState(true)
+                timerDisplay.classList.add('time-animation')
                 setTimeout(() => {
                     changeState(false)
                     player.style.display = "block";
+                    timerDisplay.classList.remove('time-animation')
                 }, 1000);
             }
         }
