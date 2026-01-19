@@ -1,6 +1,9 @@
 const bunkerContainer = document.getElementById('bunker-container')
 export const wallParts = []
+
 export const createBunker = () => {
+    wallParts.length = 0; 
+    bunkerContainer.innerHTML = "";
     for (let i = 1; i <= 4; i++) {
         const wall = document.createElement('div')
         wall.classList.add('wall')
@@ -10,9 +13,10 @@ export const createBunker = () => {
             if (j === 1 || j === 10 || (j >= 43 && j <= 48) ||
                 (j >= 53 && j <= 58) || (j >= 63 && j <= 68)){
                 wallPart.style.visibility = "hidden"
+            } else {
+                wallParts.push(wallPart)
             }
             wall.append(wallPart)
-            wallParts.push(wallPart)
         }
         bunkerContainer.append(wall)
     }

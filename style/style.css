@@ -347,3 +347,7 @@ header h2 {
 .time-animation {
     animation: flashGreen 0.5s infinite;
 }
+
+.laser, .alien-laser, .alien, #aliens-grid, #player {
+    will-change: transform;
+}

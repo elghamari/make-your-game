@@ -1,3 +1,4 @@
+
 import { player, board } from "./movePlayer.js";
 import { aliens, getAlienExtra } from "./moveAliens.js";
 import { wallParts } from "./createBunker.js"
@@ -83,8 +84,8 @@ export const moveLasers = () => {
             continue;
         }
         
-        CheckWallCollision(lasers, laser, i)
-        
+        if (CheckWallCollision(lasers, laser, i)) continue;         
+
         let rectLaser = laser.getBoundingClientRect();
         for (let j = 0; j < aliens.length; j++) {
             let alienData = aliens[j];
@@ -145,7 +146,7 @@ export const moveAlienLasers = () => {
             continue;
         }
 
-        CheckWallCollision(alientLaser, laser, i)
+        if (CheckWallCollision(alientLaser, laser, i)) continue;
 
         let rectLaser = laser.getBoundingClientRect();
         if (alientLaser.includes(laser) && player) {
@@ -204,17 +205,18 @@ export const getShooter = () => {
     return shooters[index]
 }
 
-const CheckWallCollision = (lasers, laser, i) => {
+const CheckWallCollision = (lasersArray, laser, i) => {
     let rectLaser = laser.getBoundingClientRect();
-    for (let k = 0; k < wallParts.length; k++) {
+    for (let k = wallParts.length - 1; k >= 0; k--) {
         let wall = wallParts[k]
+        if (!wall) continue 
         let rectWall = wall.getBoundingClientRect()
-        if (checkCollision(rectLaser, rectWall) && wall.style.visibility != "hidden") {
+        if (checkCollision(rectLaser, rectWall)) {
             wall.style.visibility = "hidden"
             wallParts.splice(k, 1);
-            lasers.splice(i, 1);
+            lasersArray.splice(i, 1);
             laser.remove();
-            break
+            break 
         }
     }
 }
