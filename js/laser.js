@@ -53,6 +53,7 @@ export const moveLasers = () => {
             if (checkCollision(rectLaser, rectAlien)) {
                 // alien.remove();
                 alienDiv.style.visibility = "hidden";
+                aliens.splice(j, 1);
                 laser.remove();
                 lasers.splice(i, 1);
                 addScore(alienData.points);
