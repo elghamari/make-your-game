@@ -1,10 +1,7 @@
 import { moveAliens, moveAlienExtra } from "./moveAliens.js";
 import { movePlayer, keys } from "./movePlayer.js";
-import { toggleView } from "./toggleView.js";
-import { updateTime, checkTimeLimit } from "./updateTime.js";
 import { moveLasers, shoot, moveAlienLasers, alientShoot } from "./laser.js";
-import { getPauseState } from "./gameState.js";
-import { handlePause, restartGame, getGameTime, initGame } from "./gameControl.js";
+import { handlePause, restartGame, getGameTime, initGame, getPauseState, updateTime, checkTimeLimit, toggleView } from "./gameControl.js";
 
 export const gameLoop = (time) => {
     if (!getPauseState()) {

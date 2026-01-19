@@ -1,7 +1,7 @@
 import { player, board } from "./movePlayer.js";
-import { aliens, getAlienExtra } from "./createAliens.js";
+import { aliens, getAlienExtra } from "./moveAliens.js";
 import { wallParts } from "./createBunker.js"
-import { addScore, gameState, changeState } from "./gameState.js";
+import { addScore, gameState, changeState } from "./gameControl.js";
 const timerDisplay = document.getElementById('timer-display')
 
 const laserSpeed = 10;
