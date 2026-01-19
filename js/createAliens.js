@@ -37,8 +37,9 @@ export const restAliens = () => {
     
     if (aliensGrid) {
         aliensGrid.innerHTML = "";
-        aliensGrid.style.top = "0px"; 
-        aliensGrid.style.left = "0px"; 
+        // aliensGrid.style.top = "0px"; 
+        // aliensGrid.style.left = "0px";
+        aliensGrid.style.transform = `translate(0px, 0px)`
     }
 
     aliens.length = 0;
