@@ -31,6 +31,31 @@ document.getElementById("btn-play-again").addEventListener("click", () => {
     restartGame()
 });
 
+const resizeGame = () => {
+    const container = document.getElementById('game-container');
+    if (!container) return;
+    const baseWidth = 900;
+    const baseHeight = 800;
+
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    const scale = Math.min(
+        windowWidth / baseWidth, 
+        windowHeight / baseHeight
+    );
+
+    if (windowWidth < 600) {
+        container.style.transform = `scale(${scale})`; 
+    } else {
+        container.style.transform = `scale(${scale * 0.95})`;
+    }
+}
+
+window.addEventListener('load', resizeGame);
+window.addEventListener('resize', resizeGame);
+resizeGame();
+
 const startGame = () => {
     initGame(); 
     requestAnimationFrame(gameLoop);

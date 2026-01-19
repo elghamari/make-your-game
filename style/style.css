@@ -16,8 +16,23 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    width: 100vw;
     margin: 0;
     font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 900px;
+    height: 800px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform-origin: center center;
+    flex-shrink: 0;
 }
 
 #start-screen {
@@ -25,7 +40,7 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: -50px;
+    margin-top: 0;
 }
 
 header h2 {
@@ -87,8 +102,9 @@ header h2 {
 @keyframes slideIn {
     from {
         opacity: 0;
-        transform: translateY(20px); 
+        transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -118,21 +134,23 @@ header h2 {
 
 .play-action p:hover {
     color: #00ff00;
-    text-shadow: 0 0 15px #00ff00; 
+    text-shadow: 0 0 15px #00ff00;
 }
 
 #screen {
     display: none;
+    width: 100%;
 }
 
 #game-board {
     display: flex;
     justify-content: center;
     width: 900px;
-    height: 85vh;
+    height: 700px;
     border-bottom: 4px solid #00ff00;
     position: relative;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 #aliens-grid {
@@ -147,7 +165,8 @@ header h2 {
     padding-top: 10px;
 }
 
-.alien, .alienExtra {
+.alien,
+.alienExtra {
     width: 30px;
     height: 30px;
     background-repeat: no-repeat;
@@ -197,13 +216,20 @@ header h2 {
 
 .game-info {
     width: 100%;
+    height: 80px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
 }
 
-.info-text, .score {
+.info-text,
+.score,
+#timer-display {
     color: #fff;
     font-size: 20px;
+    font-family: 'Press Start 2P', cursive;
+    white-space: nowrap;
 }
 
 .score {
@@ -217,18 +243,20 @@ header h2 {
 
 #lives {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
+
 
 .live {
     height: 30px;
-    width: 50px;
+    width: 45px;
     background-image: url('/assets/player.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
 
-.laser, .alien-laser  {
+.laser,
+.alien-laser {
     width: 0.4rem;
     height: 1.6rem;
     background-color: #00ff00;
@@ -238,7 +266,7 @@ header h2 {
 }
 
 .overlay {
-    display: none; 
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -253,10 +281,11 @@ header h2 {
 }
 
 .overlay.visible {
-    display: flex; 
+    display: flex;
 }
 
-.pause-title, .statu-title {
+.pause-title,
+.statu-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 3rem;
     color: #00ff00;
@@ -290,6 +319,7 @@ header h2 {
 .game-over {
     color: #ff0000;
 }
+
 .you-win {
     color: #00ff00;
 }
@@ -300,11 +330,13 @@ header h2 {
         opacity: 1;
         text-shadow: none;
     }
+
     50% {
         color: #00ff00;
-        text-shadow: 0 0 15px #00ff00; 
+        text-shadow: 0 0 15px #00ff00;
         opacity: 1;
     }
+
     100% {
         color: #fff;
         opacity: 1;
