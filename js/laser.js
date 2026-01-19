@@ -2,8 +2,8 @@ import { player, board } from "./movePlayer.js";
 import { aliens, getAlienExtra } from "./moveAliens.js";
 import { wallParts } from "./createBunker.js"
 import { addScore, gameState, changeState } from "./gameControl.js";
-const timerDisplay = document.getElementById('timer-display')
 
+const timerDisplay = document.getElementById('timer-display')
 const laserSpeed = 10;
 const cooldownTime = 600;
 let lastShootTime = 0;
@@ -23,20 +23,57 @@ export const shoot = (time) => {
         const laser = document.createElement("div");
         laser.classList.add("laser");
         board.append(laser)
-        let coordX = player.offsetLeft + (player.offsetWidth / 2) - (laser.offsetWidth / 2);
+        const playerRect = player.getBoundingClientRect();
+        const boardRect = board.getBoundingClientRect();
+        const currentScale = boardRect.width / 900; 
+        let coordX = (playerRect.left - boardRect.left) / currentScale + (player.offsetWidth / 2) - (laser.offsetWidth / 2);
         let coordY = board.offsetHeight - player.offsetHeight - 10;
+        
         laser.x = coordX;
         laser.y = coordY;
         laser.style.transform = `translate(${coordX}px, ${coordY}px)`;
-
+        
         lastShootTime = time;
         lasers.push(laser);
+    }
+}
+
+let lastAlienShootTime = 0
+let nextCooldown = 600
+
+export const alientShoot = (time) => {
+    if ((time - lastAlienShootTime) > nextCooldown) {
+        const shooter = getShooter()
+        if (shooter === undefined || shooter === null) {
+            return
+        }
+        const laser = document.createElement("div")
+        laser.classList.add("alien-laser")
+        board.append(laser)
+
+        const shooterRect = shooter.getBoundingClientRect()
+        const boardRect = board.getBoundingClientRect()
+        
+        const currentScale = boardRect.width / 900;
+        
+        let coordX = (shooterRect.left - boardRect.left) / currentScale + (shooter.offsetWidth / 2) - (laser.offsetWidth / 2);
+        let coordY = (shooterRect.top - boardRect.top) / currentScale + shooter.offsetHeight;
+
+        laser.x = coordX;
+        laser.y = coordY;
+        
+        laser.style.transform = `translate(${coordX}px, ${coordY}px)`
+
+        nextCooldown = Math.round(Math.random() * (600 - 300) + 300)
+        lastAlienShootTime = time
+        alientLaser.push(laser)
     }
 }
 
 export const moveLasers = () => {
     for (let i = lasers.length - 1; i >= 0; i--) {
         let laser = lasers[i];
+        
         laser.y -= laserSpeed;
         laser.style.transform = `translate(${laser.x}px, ${laser.y}px)`;
 
@@ -45,7 +82,9 @@ export const moveLasers = () => {
             lasers.splice(i, 1);
             continue;
         }
+        
         CheckWallCollision(lasers, laser, i)
+        
         let rectLaser = laser.getBoundingClientRect();
         for (let j = 0; j < aliens.length; j++) {
             let alienData = aliens[j];
@@ -65,6 +104,7 @@ export const moveLasers = () => {
                 break;
             }
         }
+        
         let alienExtra = getAlienExtra();
         if (lasers.includes(laser) && alienExtra && alienExtra.style.display === "block") {
             let rectAlienExtra = alienExtra.getBoundingClientRect();
@@ -76,6 +116,7 @@ export const moveLasers = () => {
                 addScore(point);
             }
         }
+        
         for (let j = 0; j < alientLaser.length; j++) {
             const alien_laser = alientLaser[j]
             const alienLaserRect = alien_laser.getBoundingClientRect()
@@ -85,6 +126,48 @@ export const moveLasers = () => {
                 alien_laser.remove()
                 alientLaser.splice(j, 1)
                 break
+            }
+        }
+    }
+}
+
+export const moveAlienLasers = () => {
+    for (let i = alientLaser.length - 1; i >= 0; i--) {
+        let laser = alientLaser[i]
+        
+        laser.y += laserSpeed;
+        laser.style.transform = `translate(${laser.x}px, ${laser.y}px)`;
+        
+        let boardHeight = board.offsetHeight
+        if (laser.y > boardHeight) {
+            laser.remove();
+            alientLaser.splice(i, 1);
+            continue;
+        }
+
+        CheckWallCollision(alientLaser, laser, i)
+
+        let rectLaser = laser.getBoundingClientRect();
+        if (alientLaser.includes(laser) && player) {
+            let rectPlayer = player.getBoundingClientRect();
+            if (checkCollision(rectLaser, rectPlayer)) {
+                let lives = Array.from(document.querySelectorAll('.live'))
+                player.style.display = "none";
+                laser.remove();
+                alientLaser.splice(i, 1);
+                const live = lives.pop()
+                if (live) live.remove()
+                if (lives.length === 0) {
+                    gameState("GAME OVER", "game-over")
+                    return
+                }
+                changeState(true)
+                timerDisplay.classList.add('time-animation')
+                setTimeout(() => {
+                    changeState(false)
+                    player.style.display = "block";
+                    timerDisplay.classList.remove('time-animation')
+                }, 1000);
             }
         }
     }
@@ -119,77 +202,6 @@ export const getShooter = () => {
     })
     const index = parseInt(Math.random() * shooters.length)
     return shooters[index]
-}
-
-
-let lastAlienShootTime = 0
-let nextCooldown = 600
-
-export const alientShoot = (time) => {
-    if ((time - lastAlienShootTime) > nextCooldown) {
-        const shooter = getShooter()
-        if (shooter === undefined || shooter === null) {
-            return
-        }
-        const laser = document.createElement("div")
-        laser.classList.add("alien-laser")
-        board.append(laser)
-
-
-        const shooterRect = shooter.getBoundingClientRect()
-        const boardRect = board.getBoundingClientRect()
-        const currentScale = boardRect.width / 900;
-        let coordX = (shooterRect.left - boardRect.left) / currentScale + (shooter.offsetWidth / 2) - (laser.offsetWidth / 2);
-        let coordY = (shooterRect.top - boardRect.top) / currentScale + shooter.offsetHeight;
-
-        laser.x = coordX;
-        laser.y = coordY;
-        laser.style.transform = `translate(${coordX}px, ${coordY}px)`
-
-        nextCooldown = Math.round(Math.random() * (600 - 300) + 300)
-        lastAlienShootTime = time
-        alientLaser.push(laser)
-    }
-}
-
-export const moveAlienLasers = () => {
-    for (let i = alientLaser.length - 1; i >= 0; i--) {
-        let laser = alientLaser[i]
-        laser.y += laserSpeed;
-        laser.style.transform = `translate(${laser.x}px, ${laser.y}px)`;
-        let boardHeight = board.offsetHeight
-        if (laser.y > boardHeight) {
-            laser.remove();
-            alientLaser.splice(i, 1);
-            continue;
-        }
-
-        CheckWallCollision(alientLaser, laser, i)
-
-        let rectLaser = laser.getBoundingClientRect();
-        if (alientLaser.includes(laser) && player) {
-            let rectPlayer = player.getBoundingClientRect();
-            if (checkCollision(rectLaser, rectPlayer)) {
-                let lives = Array.from(document.querySelectorAll('.live'))
-                player.style.display = "none";
-                laser.remove();
-                alientLaser.splice(i, 1);
-                const live = lives.pop()
-                if (live) live.remove()
-                if (lives.length === 0) {
-                    gameState("GAME OVER", "game-over")
-                    return
-                }
-                changeState(true)
-                timerDisplay.classList.add('time-animation')
-                setTimeout(() => {
-                    changeState(false)
-                    player.style.display = "block";
-                    timerDisplay.classList.remove('time-animation')
-                }, 1000);
-            }
-        }
-    }
 }
 
 const CheckWallCollision = (lasers, laser, i) => {
