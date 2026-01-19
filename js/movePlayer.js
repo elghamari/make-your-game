@@ -23,7 +23,8 @@ document.addEventListener("keyup", e => {
 
 export const initPlayerPosition = () => {
     x = (board.offsetWidth -player.offsetWidth) /2;
-    player.style.left = x + "px"
+    // player.style.left = x + "px"
+    player.style.transform = `translate(${x}px, 0px)`
 }
 
 export const movePlayer = () => {
@@ -38,7 +39,8 @@ export const movePlayer = () => {
     if (x < 0) x = 0
     const maxX = boardWidth - playerWidth
     if (x > maxX) x = maxX 
-    player.style.left = x + "px"
+    // player.style.left = x + "px"
+    player.style.transform = `translate(${x}px, 0px)`
 }
 
 export const createPlayer = () => {
@@ -58,4 +60,5 @@ export const resetPlayer = () => {
     keys.ArrowLeft = false;
     keys[" "] = false;
     x = 0;
+    if(player) player.style.transform = `translate(0px, 0px)`
 }

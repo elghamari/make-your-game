@@ -162,6 +162,7 @@ header h2 {
     background-size: contain;
     position: absolute;
     bottom: 10px;
+    left: 0;
 }
 
 .alienExtra {
@@ -232,6 +233,8 @@ header h2 {
     height: 1.6rem;
     background-color: #00ff00;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .overlay {
