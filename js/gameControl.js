@@ -6,16 +6,21 @@ import { resetMoveAliens } from "./moveAliens.js";
 
 let score = 0;
 let isPaused = false;
+let isGameEnded = false; 
+
 const scoreElement = document.querySelector(".score");
 const pauseScreen = document.querySelector("#pause-screen");
 const gameStatus = document.getElementById("game-status");
 const statuTitle = document.querySelector('.statu-title')
+
 export const addScore = (points)=> {
     score += points;
     scoreElement.innerText = score;
 }
 
 export const togglePause = ()=> {
+    if (isGameEnded) return;
+
     isPaused = !isPaused;
     if (isPaused) {
         pauseScreen.classList.add("visible")
@@ -33,8 +38,10 @@ export const resetGameState = ()=> {
     scoreElement.innerText = score;
 }
 
-export const gameState = (statu,clas) => {
-    isPaused = true
+export const gameState = (statu, clas) => {
+    isPaused = true;
+    isGameEnded = true; 
+    
     statuTitle.innerText = statu
     statuTitle.classList.add(clas)
     gameStatus.classList.add('visible')
@@ -63,6 +70,7 @@ export const getGameTime = (currentTime) => {
 
 export const handlePause = (e) => {
     if (e && e.type === "keydown" && e.key.toLowerCase() !== "p") return; 
+    if (isGameEnded) return;
 
     togglePause(); 
     
@@ -73,7 +81,11 @@ export const handlePause = (e) => {
 };
 
 export const restartGame = () => {
-    if (getPauseState()) togglePause();
+    if (getPauseState()) {
+         isPaused = false; 
+         pauseScreen.classList.remove("visible");
+    }
+    isGameEnded = false; 
     
     totalGameTime = 0;
     startTime = null; 
@@ -86,6 +98,8 @@ export const restartGame = () => {
     
     const bunkerContainer = document.getElementById("bunker-container");
     if (bunkerContainer) bunkerContainer.innerHTML = "";
+    const statusClass = statuTitle.classList[1]
+    if (statusClass) statuTitle.classList.remove(statusClass)
 
     createPlayer();
     initPlayerPosition(); 
@@ -99,6 +113,7 @@ export const restartGame = () => {
 export const initGame = () => {
     totalGameTime = 0;
     startTime = null;
+    isGameEnded = false; 
     createPlayer();
     createAliens();
     createLives();
