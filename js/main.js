@@ -6,18 +6,25 @@ import { handlePause, restartGame, getGameTime, initGame, getPauseState, updateT
 export const gameLoop = (time) => {
     if (!getPauseState()) {
         const gameTime = getGameTime(time); 
+        movePlayer();
+        moveAliens();
+        moveAlienExtra(gameTime);
+        if (keys[" "]) shoot(gameTime)
         alientShoot(gameTime); 
         moveLasers();
         moveAlienLasers();
-        moveAliens();
-        movePlayer();
-        moveAlienExtra(gameTime);
         updateTime(gameTime);
         checkTimeLimit(gameTime)
-        if (keys[" "]) shoot(gameTime)
     }
     requestAnimationFrame(gameLoop);
 };
+
+const startGame = () => {
+    initGame(); 
+    requestAnimationFrame(gameLoop);
+};
+
+toggleView(startGame);
 
 document.addEventListener("keydown", handlePause);
 document.getElementById("btn-continue").addEventListener("click", handlePause);
@@ -53,9 +60,3 @@ window.addEventListener('load', resizeGame);
 window.addEventListener('resize', resizeGame);
 resizeGame();
 
-const startGame = () => {
-    initGame(); 
-    requestAnimationFrame(gameLoop);
-};
-
-toggleView(startGame);
